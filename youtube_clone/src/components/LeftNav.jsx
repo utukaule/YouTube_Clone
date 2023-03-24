@@ -17,7 +17,7 @@ const LeftNav = () => {
             case 'home':
                 return setSelectedCategories(name)
             case 'menu':
-                return setSelectedCategories(name)
+                return false;
             default:
                 break;
         }
@@ -25,11 +25,14 @@ const LeftNav = () => {
     return (
         <div className='md:block w-[240px] overflow-y-auto h-full py-4 
     bg-black absolute md:relative z-10 translate-x-[-240] 
-    md:translate-x-0 transition-all'>
+    md:translate-x-0 transition-all ${
+        mobileMenu ? "translate-x-0" : ""
+    }`} '>
+
             <div className='flex px-5 flex-col'>
                 {categories.map((item) => {
                     return (
-                        <>
+                        <React.Fragment key={item.name} >
                             <LeftNavMenuItem
                                 text={item.type === "home" ? "Home" : item.name}
                                 icon={item.icon}
@@ -43,7 +46,7 @@ const LeftNav = () => {
                             {item.divider && (
                                 <hr className='my-5 border-white/[0.2]' />
                             )}
-                        </>
+                        </React.Fragment>
                     )
                 })}
                 <hr className='my-5 border-white/[0.2]' />
